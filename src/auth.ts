@@ -91,7 +91,9 @@ export class Auth {
 
   async refreshCsrf(): Promise<void> {
     if (!this.session) return;
-    const resp = await fetch(`${BASE_URL}/en/dashboard`, { headers: { "user-agent": USER_AGENT, cookie: this.getCookieHeader() }, redirect: "manual" });
+    const resp = await fetch(`${BASE_URL}/en/chats`, {
+      headers: { "user-agent": USER_AGENT, cookie: this.getCookieHeader() },
+    });
     this.updateFromResponse(resp);
     const html = await resp.text();
     const metaCsrf = this.extractCsrfToken(html);
